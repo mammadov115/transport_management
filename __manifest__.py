@@ -29,9 +29,9 @@ Long description of module's purpose
 
     ],
     # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
+    # 'demo': [
+    #     'demo/demo.xml',
+    # ],
     'installable': True,
     'application': True,
 }
