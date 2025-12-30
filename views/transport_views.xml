@@ -1,0 +1,84 @@
+<odoo>
+    <menuitem id="menu_transport_root" name="Transport" sequence="10"/>
+
+    <record id="action_transport_management" model="ir.actions.act_window">
+        <field name="name">Nəqliyyat Sifarişləri</field>
+        <field name="res_model">transport.management</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_transport_management_line" model="ir.actions.act_window">
+        <field name="name">Məhsullar</field>
+        <field name="res_model">transport.management.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Heç bir məhsul tapılmadı. Yeni bir məhsul sətri əlavə edin.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_transport_order" 
+              name="Sifarişlər" 
+              parent="menu_transport_root" 
+              action="action_transport_management"
+              sequence="10"/>
+
+    <!-- <menuitem id="menu_transport_products"
+              name="Məhsullar"
+              parent="menu_transport_root" 
+              action="action_transport_management_line"
+              sequence="20"/> -->
+
+    <record id="view_transport_management_tree" model="ir.ui.view">
+        <field name="name">transport.management.tree</field>
+        <field name="model">transport.management</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="carrier_info"/>
+                <field name="from_location"/>
+                <field name="to_location"/>
+                <field name="delivery_period"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_transport_management_form" model="ir.ui.view">
+        <field name="name">transport.management.form</field>
+        <field name="model">transport.management</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="carrier_info"/>
+                            <field name="product_id"/>
+                            <field name="incoterm"/>
+                        </group>
+                        <group>
+                            <field name="from_location"/>
+                            <field name="to_location"/>
+                            <field name="delivery_period"/>
+                            <field name="transport_mode"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Product List" name="product_lines">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
